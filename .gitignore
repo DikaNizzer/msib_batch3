@@ -49,6 +49,7 @@ Thumbs.db
 *.mov
 *.wmv
 
+app/dbs*
 app/web/build
 app/mobile/www/index.html
 app/web/src/base/base.history-lock
@@ -71,4 +72,4 @@ app/mobile/www
 .nova
 .pnpm-lock.yaml
 app/dbs/package.json
-app
+# app
