@@ -5,11 +5,12 @@
   "dependencies": {
     "@babel/preset-react": "^7.17.12",
     "@emotion/react": "^11.9.0",
+    "@iconscout/react-unicons": "^1.1.6",
+    "dbs": "workspace:^",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "web-init": "workspace:^",
-    "web-utils": "workspace:^",
-    "dbs": "workspace:^"
+    "web-utils": "workspace:^"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
