@@ -1,19 +1,21 @@
-const  Input = () => {
+import { formatToLocalTime } from 'src/api/cuaca';
+
+const  WaktuDisp = ({ weather: { dt, timezone, name, country } }) => {
     return(
         <div>
             <div className="flex items-center justify-center my-6">
                 <p className="text-white text-xl font-extralight">
-                    Surabaya , 28 - 09 - 2022
+                {formatToLocalTime(dt, timezone)}
                 </p>
             </div>
 
             <div className="flex items-center justify-center my-3">
                     <p className="text-white text-3xl font-extralight">
-                        Lorem
+                    {`${name}, ${country}`}
                     </p>
             </div>
         </div>
     )
 }
 
-export default Input;
+export default WaktuDisp;

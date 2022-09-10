@@ -1,13 +1,35 @@
-const  Input = () => {
+import React, { useState } from "react";
+
+const  Input = ({setQuery}) => {
+    const kotaRef = React.useRef(null);
+
+    const [kota, SetKota] = useState("");
+
+    const handleTombolCari = () =>{
+        if(kota !== '') setQuery({q:kota})
+    }
+    
+    const ketikaSubmit = (event) =>{
+        event.preventDefault();
+        const namaKota = kotaRef.current.value;
+        SetKota(namaKota);
+        if(kota !== '') setQuery({q:kota})
+    }
+
     return(
        <div className="flex flex-row justify-center my-6">
 
             <div className="flex flex-row w-3/4 items-center justify-center space-x-4">
-                  <input type="text" 
+
+                <form onSubmit={ketikaSubmit} >
+                  <input ref={kotaRef}
+                //   value={kota}
+                  onChange={(e) => SetKota(e.currentTarget.value)}
+                  type="text" 
                   placeholder="Cari...."
                   className="text-xl  font-light p-2 w-full shadow-xl focus:outline-none capitalize"/>
-                    
-                    <svg size={50} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-white cursor-pointer transition ease-out hover:scale-125">
+                </form>
+                    <svg size={50} onClick={handleTombolCari} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-white hover:scale-125 cursor-pointer transition ease-out ">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
 
@@ -17,8 +39,6 @@ const  Input = () => {
             </div>
             <div className="flex flex-row w-1/4 items-center justify-center">
                 <button name="" className="text-xl text-white font-light " >*C</button>
-                <p className="text-xl text-white mx-1"> | </p>
-                <button name="" className="text-xl text-white font-light ">*F</button>
             </div>
        </div>
     )

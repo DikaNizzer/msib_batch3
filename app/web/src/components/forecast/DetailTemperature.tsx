@@ -1,26 +1,30 @@
-const  DetailTemperature = () => {
+import { formatToLocalTime, iconUrlFromCode  } from 'src/api/cuaca';
+
+const  DetailTemperature = ({weather: {
+    details, icon, temp, temp_min, temp_max, sunrise, sunset, speed, humidity, feels_like, timezone
+}}) => {
     return(
         <div>
             <div className="flex items-center justify-center py-6 
             text-xl text-cyan-300">
                 <p className="">
-                    Berawan
+                    {details}
                 </p>
             </div>
 
             <div className="flex flex-row items-center justify-between text-white py-3">
-                <img className="w-20" src="http://openweathermap.org/img/wn/01d@2x.png" alt="" />
+                <img className="w-20" src={iconUrlFromCode(icon)} alt="" />
                 <p className="text-5xl">
-                    34*
+                    {details} °
                 </p>
-                <div className="flex flex-col space-y-2">
+                <div className="flex flex-col space-y-2 ml-2">
 
                     <div className="flex font-light text-sm items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-2">
                         <path fillRule="evenodd" d="M.75 9.75a3 3 0 013-3h15a3 3 0 013 3v.038c.856.173 1.5.93 1.5 1.837v2.25c0 .907-.644 1.664-1.5 1.838v.037a3 3 0 01-3 3h-15a3 3 0 01-3-3v-6zm19.5 0a1.5 1.5 0 00-1.5-1.5h-15a1.5 1.5 0 00-1.5 1.5v6a1.5 1.5 0 001.5 1.5h15a1.5 1.5 0 001.5-1.5v-6z" clipRule="evenodd" />
                     </svg>
                         Suhu :
-                        <span className="ml-1"> 34*C</span>
+                        <span className="ml-1"> {feels_like}°C</span>
                     </div>
 
                     <div className="flex font-light text-sm items-center justify-center">
@@ -30,7 +34,7 @@ const  DetailTemperature = () => {
                     </svg>
 
                         Kelembabab :
-                        <span className="ml-1"> 34*C</span>
+                        <span className="ml-1"> {humidity} %</span>
                     </div>
 
                     <div className="flex font-light text-sm items-center justify-center">
@@ -38,7 +42,7 @@ const  DetailTemperature = () => {
                         <path fillRule="evenodd" d="M.75 9.75a3 3 0 013-3h15a3 3 0 013 3v.038c.856.173 1.5.93 1.5 1.837v2.25c0 .907-.644 1.664-1.5 1.838v.037a3 3 0 01-3 3h-15a3 3 0 01-3-3v-6zm19.5 0a1.5 1.5 0 00-1.5-1.5h-15a1.5 1.5 0 00-1.5 1.5v6a1.5 1.5 0 001.5 1.5h15a1.5 1.5 0 001.5-1.5v-6z" clipRule="evenodd" />
                     </svg>
                         Kecepatan Angin :
-                        <span className="ml-1"> 34*C</span>
+                        <span className="ml-1"> {speed} Knot</span>
                     </div>
 
                 </div>
@@ -52,7 +56,7 @@ const  DetailTemperature = () => {
                 </svg>
                 <p className="font-light">  
                     Terbit <span className="font-medium ml-1">
-                        05.300
+                        {formatToLocalTime(sunrise, timezone, "hh:mm a")}
                     </span>
                 </p>
                 <p className="font-light">|</p>
@@ -62,7 +66,7 @@ const  DetailTemperature = () => {
                 </svg>
                 <p className="font-light">  
                     Terbenam <span className="font-medium ml-1">
-                        18.00
+                    {formatToLocalTime(sunset, timezone, "hh:mm a")}
                     </span>
                 </p>
                 <p className="font-light">|</p>
@@ -71,8 +75,17 @@ const  DetailTemperature = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
                 </svg>
                 <p className="font-light">  
-                    Cerah <span className="font-medium ml-1">
-                        09.00
+                    Suhu Maksimal <span className="font-medium ml-1">
+                    {temp_max.toFixed()}
+                    </span>
+                </p>
+                <p className="font-light">|</p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                </svg>
+                <p className="font-light">  
+                    Suhu  Minimum <span className="font-medium ml-1">
+                    {`${temp_min}`}
                     </span>
                 </p>
                 <p className="font-light">|</p>
